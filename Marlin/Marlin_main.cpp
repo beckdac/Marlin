@@ -1195,6 +1195,9 @@ static void homeaxis(int axis) {
     endstops_hit_on_purpose();
     axis_known_position[axis] = true;
 
+    // mjw: Update the planning position to reflect the new home position
+    plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+
     // Retract Servo endstop if enabled
     #if defined (ENABLE_AUTO_BED_LEVELING) && (PROBE_SERVO_DEACTIVATION_DELAY > 0)
         if (axis==Z_AXIS)
